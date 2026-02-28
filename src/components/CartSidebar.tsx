@@ -65,14 +65,14 @@ const CartSidebar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setCartOpen(false)}
-              className="fixed inset-0 bg-foreground/40 backdrop-blur-sm z-50"
+              className="fixed inset-0 bg-foreground/40 backdrop-blur-sm z-[100]"
             />
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-0 h-full w-full max-w-md bg-card z-50 shadow-2xl flex flex-col"
+              className="fixed right-0 top-0 h-full w-full max-w-md bg-card z-[110] shadow-2xl flex flex-col"
             >
               <div className="flex items-center justify-between p-5 border-b border-border">
                 <div className="flex items-center gap-2">
