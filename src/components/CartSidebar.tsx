@@ -31,6 +31,7 @@ const CartSidebar = () => {
       navigate("/login");
       return;
     }
+    setCartOpen(false);
     setIsAddressOpen(true);
   };
 

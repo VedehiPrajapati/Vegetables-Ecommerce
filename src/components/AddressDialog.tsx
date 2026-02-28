@@ -100,19 +100,15 @@ const AddressDialog = ({ isOpen, onClose }: AddressDialogProps) => {
                             initial={{ opacity: 0, scale: 0.9, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                            className="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-[40px] shadow-2xl overflow-hidden relative"
+                            className="bg-white dark:bg-slate-900 w-full max-w-md rounded-[32px] shadow-2xl overflow-hidden relative"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {step === 1 ? (
                                 <>
                                     {/* Header Section */}
-                                    <div className="p-8 pb-4 flex items-start justify-between">
+                                    <div className="p-6 pb-2 flex items-start justify-between mt-2">
                                         <div>
-                                            <div className="flex items-center gap-2 mb-1">
-                                                <div className="w-8 h-1 bg-primary rounded-full" />
-                                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Checkout</span>
-                                            </div>
-                                            <h2 className="text-4xl font-black text-slate-900 dark:text-white leading-tight">
+                                            <h2 className="text-2xl font-black text-slate-900 dark:text-white leading-tight">
                                                 Delivery <span className="text-primary italic">Details</span>
                                             </h2>
                                         </div>
@@ -120,40 +116,40 @@ const AddressDialog = ({ isOpen, onClose }: AddressDialogProps) => {
                                             whileHover={{ scale: 1.1, rotate: 90 }}
                                             whileTap={{ scale: 0.9 }}
                                             onClick={onClose}
-                                            className="p-3 bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-2xl transition-all"
+                                            className="p-2 bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-xl transition-all"
                                         >
-                                            <X className="w-6 h-6" />
+                                            <X className="w-5 h-5" />
                                         </motion.button>
                                     </div>
 
-                                    <div className="px-8 mb-4">
-                                        <div className="flex items-center gap-4 bg-primary/5 p-4 rounded-[24px] border border-primary/10">
-                                            <div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center text-white shadow-lg shadow-primary/30">
-                                                <MapPin className="w-6 h-6" />
+                                    <div className="px-6 mb-4">
+                                        <div className="flex items-center gap-3 bg-primary/5 p-3 rounded-2xl border border-primary/10">
+                                            <div className="w-10 h-10 shrink-0 bg-primary rounded-xl flex items-center justify-center text-white shadow-md shadow-primary/30">
+                                                <MapPin className="w-5 h-5" />
                                             </div>
                                             <div className="flex flex-col">
-                                                <span className="text-sm font-bold text-slate-900 dark:text-white">Shipping Address</span>
-                                                <span className="text-xs text-slate-500">We currently deliver only in Mumbai city.</span>
+                                                <span className="text-sm font-bold text-slate-900 dark:text-white leading-tight">Shipping</span>
+                                                <span className="text-xs text-slate-500">We currently deliver only in Pune city.</span>
                                             </div>
                                         </div>
                                     </div>
 
                                     {/* Form Section */}
-                                    <form onSubmit={handleSubmit} className="p-8 pt-4 space-y-8 overflow-y-auto max-h-[70vh]">
-                                        <div className="space-y-6">
+                                    <form onSubmit={handleSubmit} className="p-6 pt-2 space-y-6 overflow-y-auto max-h-[60vh] custom-scrollbar">
+                                        <div className="space-y-4">
                                             {/* Area Select */}
                                             <div>
                                                 <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1 mb-2 block">
                                                     Service Area
                                                 </label>
                                                 {loadingAreas ? (
-                                                    <Skeleton className="w-full h-14 rounded-2xl" />
+                                                    <Skeleton className="w-full h-12 rounded-xl" />
                                                 ) : (
                                                     <div className="relative group">
                                                         <select
                                                             value={formData.area}
                                                             onChange={(e) => setFormData({ ...formData, area: e.target.value })}
-                                                            className="w-full h-14 pl-12 pr-12 bg-slate-100 dark:bg-slate-900 border-2 border-transparent focus:border-primary/50 rounded-2xl outline-none transition-all appearance-none cursor-pointer font-bold text-slate-900 dark:text-white"
+                                                            className="w-full h-12 pl-10 pr-10 bg-slate-100 dark:bg-slate-900 border-2 border-transparent focus:border-primary/50 rounded-xl outline-none transition-all appearance-none cursor-pointer text-sm font-bold text-slate-900 dark:text-white"
                                                         >
                                                             {areas.map((area) => (
                                                                 <option key={area._id} value={area._id}>
@@ -161,7 +157,7 @@ const AddressDialog = ({ isOpen, onClose }: AddressDialogProps) => {
                                                                 </option>
                                                             ))}
                                                         </select>
-                                                        <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-primary group-focus-within:scale-110 transition-transform" />
+                                                        <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-primary group-focus-within:scale-110 transition-transform" />
                                                     </div>
                                                 )}
                                             </div>
@@ -172,13 +168,13 @@ const AddressDialog = ({ isOpen, onClose }: AddressDialogProps) => {
                                                     Complete Address
                                                 </label>
                                                 <div className="relative group">
-                                                    <Home className="absolute left-4 top-4 w-5 h-5 text-primary group-focus-within:scale-110 transition-transform" />
+                                                    <Home className="absolute left-3 top-3 w-4 h-4 text-primary group-focus-within:scale-110 transition-transform" />
                                                     <textarea
                                                         value={formData.address}
                                                         onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                                                        placeholder="Your house number, street name, and nearby landmark..."
+                                                        placeholder="Your house no, street, and landmark..."
                                                         required
-                                                        className="w-full h-32 pl-12 pr-6 py-4 bg-slate-100 dark:bg-slate-900 border-2 border-transparent focus:border-primary/50 rounded-[24px] outline-none transition-all resize-none font-bold text-slate-900 dark:text-white placeholder:text-slate-400/60 placeholder:font-medium"
+                                                        className="w-full h-24 pl-10 pr-4 py-3 bg-slate-100 dark:bg-slate-900 border-2 border-transparent focus:border-primary/50 rounded-xl outline-none transition-all resize-none text-sm font-bold text-slate-900 dark:text-white placeholder:text-slate-400/60 placeholder:font-medium"
                                                     />
                                                 </div>
                                             </div>
@@ -188,12 +184,12 @@ const AddressDialog = ({ isOpen, onClose }: AddressDialogProps) => {
                                                 <div className="space-y-2">
                                                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">City</label>
                                                     <div className="relative">
-                                                        <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-primary" />
+                                                        <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-primary" />
                                                         <input
                                                             type="text"
                                                             value={formData.city}
                                                             readOnly
-                                                            className="w-full h-14 pl-10 pr-4 bg-slate-100 dark:bg-slate-800 rounded-2xl outline-none font-bold text-slate-400 cursor-not-allowed border-2 border-transparent"
+                                                            className="w-full h-12 pl-9 pr-3 bg-slate-100 dark:bg-slate-800 rounded-xl outline-none text-sm font-bold text-slate-400 cursor-not-allowed border-2 border-transparent"
                                                         />
                                                     </div>
                                                 </div>
@@ -205,20 +201,20 @@ const AddressDialog = ({ isOpen, onClose }: AddressDialogProps) => {
                                                         onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
                                                         placeholder="400001"
                                                         maxLength={6}
-                                                        className="w-full h-14 px-5 bg-slate-100 dark:bg-slate-900 border-2 border-transparent focus:border-primary/50 rounded-2xl outline-none font-bold text-slate-900 transition-all placeholder:text-slate-400/40"
+                                                        className="w-full h-12 px-4 bg-slate-100 dark:bg-slate-900 border-2 border-transparent focus:border-primary/50 rounded-xl outline-none text-sm font-bold text-slate-900 transition-all placeholder:text-slate-400/40"
                                                     />
                                                 </div>
                                             </div>
                                         </div>
 
                                         {/* Pricing and Action Footer */}
-                                        <div className="pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6">
+                                        <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-4">
                                             <div className="flex flex-col">
-                                                <div className="flex items-center gap-2">
+                                                <div className="flex items-center gap-1.5">
                                                     <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                                                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Final Total</span>
+                                                    <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">Total</span>
                                                 </div>
-                                                <span className="text-4xl font-black text-primary">
+                                                <span className="text-2xl font-black text-primary leading-none mt-0.5">
                                                     ₹{Number(totalAmount || 0).toLocaleString("en-IN", { minimumFractionDigits: 2 })}
                                                 </span>
                                             </div>
@@ -226,15 +222,15 @@ const AddressDialog = ({ isOpen, onClose }: AddressDialogProps) => {
                                             <motion.button
                                                 type="submit"
                                                 disabled={isSubmitting || loadingAreas}
-                                                whileHover={{ scale: 1.02, y: -2 }}
+                                                whileHover={{ scale: 1.02 }}
                                                 whileTap={{ scale: 0.98 }}
-                                                className="w-full sm:w-auto h-16 px-10 bg-primary text-white rounded-[24px] font-black text-xl flex items-center justify-center gap-3 shadow-[0_12px_24px_-8px_rgba(30,190,120,0.5)] transition-all hover:shadow-[0_20px_40px_-12px_rgba(30,190,120,0.6)] disabled:opacity-50 disabled:grayscale"
+                                                className="flex-1 h-12 px-6 bg-primary text-white rounded-xl font-bold text-base flex items-center justify-center gap-2 shadow-lg shadow-primary/30 transition-all hover:shadow-primary/50 disabled:opacity-50 disabled:grayscale"
                                             >
                                                 {isSubmitting ? (
-                                                    <Loader2 className="w-7 h-7 animate-spin" />
+                                                    <Loader2 className="w-5 h-5 animate-spin" />
                                                 ) : (
                                                     <>
-                                                        <Send className="w-6 h-6" />
+                                                        <Send className="w-4 h-4" />
                                                         <span>Place Order</span>
                                                     </>
                                                 )}
@@ -264,10 +260,10 @@ const AddressDialog = ({ isOpen, onClose }: AddressDialogProps) => {
                                             className="absolute inset-0 bg-primary rounded-full"
                                         />
                                     </div>
-                                    <h3 className="text-4xl font-black text-slate-900 dark:text-white mb-4">
+                                    <h3 className="text-3xl font-black text-slate-900 dark:text-white mb-3">
                                         Order <span className="text-primary italic">Confirmed!</span>
                                     </h3>
-                                    <p className="text-slate-500 max-w-xs mx-auto leading-relaxed">
+                                    <p className="text-sm text-slate-500 max-w-xs mx-auto leading-relaxed">
                                         Your fresh harvest is being prepared for delivery. Expect a call from our captain soon!
                                     </p>
                                     <div className="mt-10 flex items-center gap-2 p-3 px-6 bg-slate-100 dark:bg-slate-800 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-400">
