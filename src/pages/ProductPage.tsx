@@ -3,6 +3,7 @@ import ProductCard, { ProductCardSkeleton } from "@/components/ProductCard";
 import api from "@/services/api";
 import Header from "@/components/Header";
 import { Product } from "@/data/products";
+import { useSearchParams } from "react-router-dom";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "";
 
@@ -19,7 +20,7 @@ const ProductsPage = () => {
   const [priceMax, setPriceMax] = useState("");
   const [quality, setQuality] = useState<string[]>([]);
   const [moq, setMoq] = useState("Any Quantity");
-
+  const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -34,7 +35,17 @@ const ProductsPage = () => {
 
     fetchCategories();
   }, []);
-
+  useEffect(() => {
+  const categoryFromUrl = searchParams.get("category");
+  if (categoryFromUrl) {
+    setSelectedCategory(categoryFromUrl);
+  }
+}, [searchParams]);
+const handleCategoryChange = (id: string) => {
+  const newId = selectedCategory === id ? "" : id;
+  setSelectedCategory(newId);
+  setSearchParams(newId ? { category: newId } : {});
+};
   const fetchProducts = async () => {
     try {
       setLoading(true);
@@ -139,7 +150,7 @@ const ProductsPage = () => {
               return (
                 <button
                   key={cat._id}
-                  onClick={() => setSelectedCategory(cat._id)}
+                  onClick={() => handleCategoryChange(cat._id)}
                   className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs border ${
                     active
                       ? "bg-green-500 text-white"
@@ -191,7 +202,7 @@ const ProductsPage = () => {
                     <input
                       type="checkbox"
                       checked={selectedCategory === cat._id}
-                      onChange={() => setSelectedCategory(cat._id)}
+                      onChange={() => handleCategoryChange(cat._id)}
                       className="accent-green-600"
                     />
                     {cat.name}

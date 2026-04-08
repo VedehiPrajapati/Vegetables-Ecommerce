@@ -346,6 +346,7 @@ import {
   Coins,
   Leaf,
   BadgeCheck,
+  ShoppingCart,
 } from "lucide-react";
 import banner5 from "@/assets/banner5.png";
 import banner2 from "@/assets/banner2.jpg";
@@ -358,7 +359,7 @@ const slides = [
     title: ["Farm-Fresh Produce.", "Direct to your Business."],
     highlight: 1,
     subtitle:
-      "Transparent daily pricing, stringent quality checks, and reliable next-day delivery for restaurants, hotels, and retailers.",
+      "Transparent daily pricing, stringent quality checks, and reliable next-day delivery ",
     stats: [
       { Icon: Wheat, value: "200+", label: "Verified farmers" },
       { Icon: Zap, value: "Next-day", label: "Guaranteed delivery" },
@@ -377,17 +378,17 @@ const slides = [
     ],
   },
   {
-    image: banner4,
-    badge: "Organic Collection",
-    title: ["Organic Greens.", "Healthy & Natural."],
-    highlight: 1,
-    subtitle:
-      "100% organic greens delivered fresh every morning. Zero pesticides, certified quality, consistent supply.",
-    stats: [
-      { Icon: Leaf, value: "100%", label: "Certified organic" },
-      { Icon: BadgeCheck, value: "Grade A", label: "Quality assured" },
-    ],
-  },
+  image: banner4,
+  badge: "Wholesale Simplified",
+  title: ["Primary Markets.", "At Your Doorstep."],
+  highlight: 1, 
+  subtitle:
+    "Skip the early morning logistics and heavy lifting. We source directly from the largest wholesale hubs to provide sorted, graded produce delivered straight to your business.",
+  stats: [
+    { Icon: ShoppingCart, value: "Bulk", label: "Wholesale Rates" },
+    { Icon: Truck, value: "Zero Hassle", label: "Direct Delivery" },
+  ],
+},
 ];
 
 const features = [
