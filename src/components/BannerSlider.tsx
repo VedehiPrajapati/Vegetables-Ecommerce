@@ -1,5 +1,8 @@
 
+
+
 // import { useState, useEffect, useRef } from "react";
+// import { useNavigate } from "react-router-dom";
 // import {
 //   ChevronLeft,
 //   ChevronRight,
@@ -13,6 +16,7 @@
 //   Coins,
 //   Leaf,
 //   BadgeCheck,
+//   ShoppingCart,
 // } from "lucide-react";
 // import banner5 from "@/assets/banner5.png";
 // import banner2 from "@/assets/banner2.jpg";
@@ -25,7 +29,7 @@
 //     title: ["Farm-Fresh Produce.", "Direct to your Business."],
 //     highlight: 1,
 //     subtitle:
-//       "Transparent daily pricing, stringent quality checks, and reliable next-day delivery for restaurants, hotels, and retailers.",
+//       "Transparent daily pricing, stringent quality checks, and reliable next-day delivery ",
 //     stats: [
 //       { Icon: Wheat, value: "200+", label: "Verified farmers" },
 //       { Icon: Zap, value: "Next-day", label: "Guaranteed delivery" },
@@ -44,17 +48,17 @@
 //     ],
 //   },
 //   {
-//     image: banner4,
-//     badge: "Organic Collection",
-//     title: ["Organic Greens.", "Healthy & Natural."],
-//     highlight: 1,
-//     subtitle:
-//       "100% organic greens delivered fresh every morning. Zero pesticides, certified quality, consistent supply.",
-//     stats: [
-//       { Icon: Leaf, value: "100%", label: "Certified organic" },
-//       { Icon: BadgeCheck, value: "Grade A", label: "Quality assured" },
-//     ],
-//   },
+//   image: banner4,
+//   badge: "Wholesale Simplified",
+//   title: ["Primary Markets.", "At Your Doorstep."],
+//   highlight: 1, 
+//   subtitle:
+//     "Skip the early morning logistics and heavy lifting. We source directly from the largest wholesale hubs to provide sorted, graded produce delivered straight to your business.",
+//   stats: [
+//     { Icon: ShoppingCart, value: "Bulk", label: "Wholesale Rates" },
+//     { Icon: Truck, value: "Zero Hassle", label: "Direct Delivery" },
+//   ],
+// },
 // ];
 
 // const features = [
@@ -82,7 +86,6 @@
 // ];
 
 // const INTERVAL = 5000;
-// const FEATURE_BAR_HEIGHT = 76;
 // const FEATURE_BAR_OVERLAP = 38;
 
 // const BannerSlider = () => {
@@ -92,6 +95,7 @@
 //   const startTimeRef = useRef(null);
 //   const touchStartX = useRef(null);
 //   const touchStartY = useRef(null);
+//   const navigate = useNavigate();
 
 //   const animateProgress = () => {
 //     cancelAnimationFrame(progressRef.current);
@@ -130,7 +134,6 @@
 //     startTimer();
 //   };
 
-//   // Swipe support
 //   const handleTouchStart = (e) => {
 //     touchStartX.current = e.touches[0].clientX;
 //     touchStartY.current = e.touches[0].clientY;
@@ -171,7 +174,6 @@
 //                 className="w-full h-full object-cover object-center"
 //               />
 
-//               {/* GRADIENT — slightly stronger on mobile for readability */}
 //               <div className="absolute inset-0 bg-[linear-gradient(105deg,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.68)_50%,rgba(0,0,0,0.28)_100%)] sm:bg-[linear-gradient(105deg,rgba(0,0,0,0.88)_0%,rgba(0,0,0,0.65)_50%,rgba(0,0,0,0.25)_100%)]" />
 
 //               {/* CONTENT */}
@@ -202,16 +204,22 @@
 
 //                 {/* BUTTONS */}
 //                 <div className="flex flex-row gap-2 sm:gap-3 w-full justify-center sm:justify-start sm:w-auto">
-//                   <button className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all hover:-translate-y-px active:scale-95">
+//                   <button
+//                     onClick={() => navigate("/products")}
+//                     className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all hover:-translate-y-px active:scale-95"
+//                   >
 //                     <Activity size={13} />
 //                     View Market Rates
 //                   </button>
-//                   <button className="flex items-center justify-center bg-white/10 hover:bg-white/20 text-white border border-white/30 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all hover:-translate-y-px active:scale-95">
+//                   <button
+//                     onClick={() => navigate("/products")}
+//                     className="flex items-center justify-center bg-white/10 hover:bg-white/20 text-white border border-white/30 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all hover:-translate-y-px active:scale-95"
+//                   >
 //                     Order Now
 //                   </button>
 //                 </div>
 
-//                 {/* STAT CHIPS — visible on mobile as small row, hidden on md (shown on right side instead) */}
+//                 {/* STAT CHIPS — mobile */}
 //                 <div className="flex gap-2 mt-4 md:hidden">
 //                   {slide.stats.map((s, j) => (
 //                     <div
@@ -230,7 +238,7 @@
 //                 </div>
 //               </div>
 
-//               {/* STAT CHIPS — desktop only right column */}
+//               {/* STAT CHIPS — desktop */}
 //               <div className="absolute right-8 top-1/2 -translate-y-[60%] hidden md:flex flex-col gap-3">
 //                 {slide.stats.map((s, j) => (
 //                   <div
@@ -251,7 +259,7 @@
 //           ))}
 //         </div>
 
-//         {/* NAV BUTTONS — hidden on mobile (swipe instead), visible sm+ */}
+//         {/* NAV BUTTONS */}
 //         <button
 //           onClick={() => go(-1)}
 //           className="absolute left-3 top-[calc(50%-44px)] -translate-y-1/2 hidden sm:flex w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-white items-center justify-center shadow transition-all hover:scale-110 z-20"
@@ -279,7 +287,7 @@
 //         </div>
 //       </div>
 
-//       {/* ── FEATURE BAR — straddles banner bottom edge ── */}
+//       {/* ── FEATURE BAR ── */}
 //       <div
 //         className="absolute left-0 right-0 flex justify-center px-3 sm:px-6 z-30"
 //         style={{ bottom: 0 }}
@@ -293,21 +301,22 @@
 //           {features.map((f, i) => (
 //             <div
 //               key={i}
-//               className={`group flex items-center gap-2 sm:gap-3 px-2 xs:px-3 sm:px-5 py-3 sm:py-4 relative transition-colors hover:bg-green-50 cursor-default ${
+//               onClick={() => navigate("/products")}
+//               className={`group flex items-center gap-2 sm:gap-3 px-2 xs:px-3 sm:px-5 py-3 sm:py-4 relative transition-colors hover:bg-green-50 cursor-pointer ${
 //                 i < features.length - 1 ? "border-r border-gray-100" : ""
 //               }`}
 //             >
 //               {/* HOVER UNDERLINE */}
 //               <div className="absolute bottom-0 left-2 right-2 xs:left-3 xs:right-3 sm:left-5 sm:right-5 h-[2px] bg-green-600 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300" />
 
-//               {/* ICON — hidden on mobile, visible sm+ */}
+//               {/* ICON — sm+ */}
 //               <div
 //                 className={`hidden sm:flex w-9 h-9 md:w-[46px] md:h-[46px] rounded-[12px] md:rounded-[14px] items-center justify-center flex-shrink-0 ${f.iconBg}`}
 //               >
 //                 <f.Icon size={18} className={f.iconColor} strokeWidth={1.8} />
 //               </div>
 
-//               {/* ICON — mobile only, smaller */}
+//               {/* ICON — mobile */}
 //               <div
 //                 className={`flex sm:hidden w-7 h-7 rounded-[10px] items-center justify-center flex-shrink-0 ${f.iconBg}`}
 //               >
@@ -318,7 +327,7 @@
 //                 <p className="text-[9px] xs:text-[10px] sm:text-[12px] md:text-[13px] font-bold text-gray-900 leading-tight">
 //                   {f.title}
 //                 </p>
-//                 <p className=" xs:block text-[8px] sm:text-[10px] md:text-[11px] text-gray-500 mt-0.5 leading-tight">
+//                 <p className="xs:block text-[8px] sm:text-[10px] md:text-[11px] text-gray-500 mt-0.5 leading-tight">
 //                   {f.sub}
 //                 </p>
 //               </div>
@@ -331,6 +340,7 @@
 // };
 
 // export default BannerSlider;
+
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -344,8 +354,6 @@ import {
   Zap,
   Apple,
   Coins,
-  Leaf,
-  BadgeCheck,
   ShoppingCart,
 } from "lucide-react";
 import banner5 from "@/assets/banner5.png";
@@ -378,17 +386,17 @@ const slides = [
     ],
   },
   {
-  image: banner4,
-  badge: "Wholesale Simplified",
-  title: ["Primary Markets.", "At Your Doorstep."],
-  highlight: 1, 
-  subtitle:
-    "Skip the early morning logistics and heavy lifting. We source directly from the largest wholesale hubs to provide sorted, graded produce delivered straight to your business.",
-  stats: [
-    { Icon: ShoppingCart, value: "Bulk", label: "Wholesale Rates" },
-    { Icon: Truck, value: "Zero Hassle", label: "Direct Delivery" },
-  ],
-},
+    image: banner4,
+    badge: "Wholesale Simplified",
+    title: ["Primary Markets.", "At Your Doorstep."],
+    highlight: 1,
+    subtitle:
+      "Skip the early morning logistics and heavy lifting. We source directly from the largest wholesale hubs to provide sorted, graded produce delivered straight to your business.",
+    stats: [
+      { Icon: ShoppingCart, value: "Bulk", label: "Wholesale Rates" },
+      { Icon: Truck, value: "Zero Hassle", label: "Direct Delivery" },
+    ],
+  },
 ];
 
 const features = [
@@ -487,107 +495,117 @@ const BannerSlider = () => {
     >
       {/* ── BANNER ── */}
       <div
-        className="relative w-full h-[380px] xs:h-[400px] sm:h-[460px] md:h-[520px] overflow-hidden rounded-b-[28px] bg-[#0a1a0f]"
+        className="relative w-full h-[320px] xs:h-[360px] sm:h-[460px] md:h-[520px] overflow-hidden rounded-b-[28px] bg-[#0a1a0f]"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        {/* SLIDING TRACK */}
-        <div
-          className="flex h-full transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.175,1)]"
-          style={{ transform: `translateX(-${current * 100}%)` }}
-        >
-          {slides.map((slide, i) => (
-            <div key={i} className="relative min-w-full h-full flex-shrink-0">
-              <img
-                src={slide.image}
-                alt={`slide-${i}`}
-                className="w-full h-full object-cover object-center"
-              />
+        {/*
+          KEY FIX: Each slide is absolutely positioned and offset using
+          translateX((i - current) * 100%). This way:
+            - slide 0 at current=0 → translateX(0%)   → visible
+            - slide 1 at current=0 → translateX(100%)  → off-screen right
+            - slide 2 at current=0 → translateX(200%)  → off-screen right
+            - slide 1 at current=1 → translateX(0%)   → visible
+          100% here means 100% of the slide's own width (the container),
+          which is always exactly the viewport width. No flex-track needed.
+        */}
+        {slides.map((slide, i) => (
+          <div
+            key={i}
+            className="absolute inset-0 w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.175,1)]"
+            style={{ transform: `translateX(${(i - current) * 100}%)` }}
+          >
+            {/* IMAGE */}
+            <img
+              src={slide.image}
+              alt={`slide-${i}`}
+              className="absolute inset-0 w-full h-full object-cover object-center"
+            />
 
-              <div className="absolute inset-0 bg-[linear-gradient(105deg,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.68)_50%,rgba(0,0,0,0.28)_100%)] sm:bg-[linear-gradient(105deg,rgba(0,0,0,0.88)_0%,rgba(0,0,0,0.65)_50%,rgba(0,0,0,0.25)_100%)]" />
+            {/* OVERLAY */}
+            <div className="absolute inset-0 bg-[linear-gradient(105deg,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.68)_50%,rgba(0,0,0,0.28)_100%)] sm:bg-[linear-gradient(105deg,rgba(0,0,0,0.88)_0%,rgba(0,0,0,0.65)_50%,rgba(0,0,0,0.25)_100%)]" />
 
-              {/* CONTENT */}
-              <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-5 sm:items-start sm:text-left sm:px-10 md:px-14 pb-16 sm:pb-12">
+            {/* CONTENT */}
+            <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4 sm:items-start sm:text-left sm:px-10 md:px-14 pb-14 sm:pb-12">
 
-                {/* BADGE */}
-                <div className="inline-flex items-center gap-2 bg-green-400/15 border border-green-400/35 text-green-400 text-[10px] sm:text-[11px] font-semibold tracking-widest uppercase px-3 py-[5px] rounded-full w-fit mb-3 sm:mb-4">
-                  <span className="w-[6px] h-[6px] rounded-full bg-green-400 animate-pulse" />
-                  {slide.badge}
-                </div>
-
-                {/* TITLE */}
-                <h1 className="text-[22px] xs:text-[26px] sm:text-3xl md:text-5xl font-extrabold text-white leading-tight max-w-[260px] xs:max-w-[290px] sm:max-w-sm md:max-w-xl mb-2 sm:mb-3">
-                  {slide.title.map((line, j) => (
-                    <span
-                      key={j}
-                      className={`block ${j === slide.highlight ? "text-green-400" : ""}`}
-                    >
-                      {line}
-                    </span>
-                  ))}
-                </h1>
-
-                {/* SUBTITLE */}
-                <p className="text-[11px] xs:text-xs sm:text-sm text-white/70 max-w-[240px] xs:max-w-[270px] sm:max-w-sm md:max-w-md leading-relaxed mb-5 sm:mb-6">
-                  {slide.subtitle}
-                </p>
-
-                {/* BUTTONS */}
-                <div className="flex flex-row gap-2 sm:gap-3 w-full justify-center sm:justify-start sm:w-auto">
-                  <button
-                    onClick={() => navigate("/products")}
-                    className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all hover:-translate-y-px active:scale-95"
-                  >
-                    <Activity size={13} />
-                    View Market Rates
-                  </button>
-                  <button
-                    onClick={() => navigate("/products")}
-                    className="flex items-center justify-center bg-white/10 hover:bg-white/20 text-white border border-white/30 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all hover:-translate-y-px active:scale-95"
-                  >
-                    Order Now
-                  </button>
-                </div>
-
-                {/* STAT CHIPS — mobile */}
-                <div className="flex gap-2 mt-4 md:hidden">
-                  {slide.stats.map((s, j) => (
-                    <div
-                      key={j}
-                      className="flex items-center gap-2 bg-white/10 border border-white/15 backdrop-blur-sm rounded-xl px-3 py-2"
-                    >
-                      <div className="w-6 h-6 rounded-lg bg-green-400/20 flex items-center justify-center flex-shrink-0">
-                        <s.Icon size={12} className="text-green-400" strokeWidth={1.8} />
-                      </div>
-                      <div>
-                        <div className="text-sm font-extrabold text-white leading-none">{s.value}</div>
-                        <div className="text-[9px] text-white/60 mt-0.5">{s.label}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+              {/* BADGE */}
+              <div className="inline-flex items-center gap-1.5 bg-green-400/15 border border-green-400/35 text-green-400 text-[9px] sm:text-[11px] font-semibold tracking-widest uppercase px-2.5 py-[4px] rounded-full w-fit mb-2.5 sm:mb-4">
+                <span className="w-[5px] h-[5px] rounded-full bg-green-400 animate-pulse flex-shrink-0" />
+                {slide.badge}
               </div>
 
-              {/* STAT CHIPS — desktop */}
-              <div className="absolute right-8 top-1/2 -translate-y-[60%] hidden md:flex flex-col gap-3">
+              {/* TITLE */}
+              <h1 className="text-[20px] xs:text-[23px] sm:text-3xl md:text-5xl font-extrabold text-white leading-tight w-full max-w-[240px] xs:max-w-[270px] sm:max-w-sm md:max-w-xl mb-2 sm:mb-3 mx-auto sm:mx-0">
+                {slide.title.map((line, j) => (
+                  <span
+                    key={j}
+                    className={`block ${j === slide.highlight ? "text-green-400" : ""}`}
+                  >
+                    {line}
+                  </span>
+                ))}
+              </h1>
+
+              {/* SUBTITLE */}
+              <p className="text-[10px] xs:text-[11px] sm:text-sm text-white/70 w-full max-w-[230px] xs:max-w-[260px] sm:max-w-sm md:max-w-md leading-relaxed mb-4 sm:mb-6 mx-auto sm:mx-0">
+                {slide.subtitle}
+              </p>
+
+              {/* BUTTONS */}
+              <div className="flex flex-row gap-2 sm:gap-3 justify-center sm:justify-start">
+                <button
+                  onClick={() => navigate("/products")}
+                  className="flex items-center justify-center gap-1.5 bg-green-600 hover:bg-green-700 text-white px-3 py-2 sm:px-5 sm:py-3 rounded-xl text-[10px] xs:text-xs sm:text-sm font-bold transition-all hover:-translate-y-px active:scale-95"
+                >
+                  <Activity size={11} />
+                  View Market Rates
+                </button>
+                <button
+                  onClick={() => navigate("/products")}
+                  className="flex items-center justify-center bg-white/10 hover:bg-white/20 text-white border border-white/30 px-3 py-2 sm:px-5 sm:py-3 rounded-xl text-[10px] xs:text-xs sm:text-sm font-semibold transition-all hover:-translate-y-px active:scale-95"
+                >
+                  Order Now
+                </button>
+              </div>
+
+              {/* STAT CHIPS — mobile */}
+              <div className="flex gap-2 mt-3 md:hidden">
                 {slide.stats.map((s, j) => (
                   <div
                     key={j}
-                    className="flex items-center gap-3 bg-white/10 border border-white/15 backdrop-blur-md rounded-[14px] px-4 py-3 min-w-[170px]"
+                    className="flex items-center gap-1.5 bg-white/10 border border-white/15 backdrop-blur-sm rounded-xl px-2.5 py-1.5"
                   >
-                    <div className="w-9 h-9 rounded-xl bg-green-400/20 flex items-center justify-center flex-shrink-0">
-                      <s.Icon size={18} className="text-green-400" strokeWidth={1.8} />
+                    <div className="w-5 h-5 rounded-lg bg-green-400/20 flex items-center justify-center flex-shrink-0">
+                      <s.Icon size={10} className="text-green-400" strokeWidth={1.8} />
                     </div>
                     <div>
-                      <div className="text-xl font-extrabold text-white leading-none">{s.value}</div>
-                      <div className="text-[11px] text-white/60 mt-0.5">{s.label}</div>
+                      <div className="text-[11px] font-extrabold text-white leading-none">{s.value}</div>
+                      <div className="text-[8px] text-white/60 mt-0.5 leading-none">{s.label}</div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-          ))}
-        </div>
+
+            {/* STAT CHIPS — desktop */}
+            <div className="absolute right-8 top-1/2 -translate-y-[60%] hidden md:flex flex-col gap-3">
+              {slide.stats.map((s, j) => (
+                <div
+                  key={j}
+                  className="flex items-center gap-3 bg-white/10 border border-white/15 backdrop-blur-md rounded-[14px] px-4 py-3 min-w-[170px]"
+                >
+                  <div className="w-9 h-9 rounded-xl bg-green-400/20 flex items-center justify-center flex-shrink-0">
+                    <s.Icon size={18} className="text-green-400" strokeWidth={1.8} />
+                  </div>
+                  <div>
+                    <div className="text-xl font-extrabold text-white leading-none">{s.value}</div>
+                    <div className="text-[11px] text-white/60 mt-0.5">{s.label}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
 
         {/* NAV BUTTONS */}
         <button
@@ -618,53 +636,54 @@ const BannerSlider = () => {
       </div>
 
       {/* ── FEATURE BAR ── */}
+<div
+  className="absolute left-0 right-0 flex justify-center px-3 sm:px-6 z-30"
+  style={{ bottom: 0 }}
+>
+  <div
+    className="w-full max-w-4xl bg-white rounded-[20px] grid grid-cols-3 overflow-hidden"
+    style={{
+      boxShadow: "0 8px 40px rgba(0,0,0,0.18), 0 2px 12px rgba(0,0,0,0.10)",
+    }}
+  >
+    {features.map((f, i) => (
       <div
-        className="absolute left-0 right-0 flex justify-center px-3 sm:px-6 z-30"
-        style={{ bottom: 0 }}
+        key={i}
+        onClick={() => navigate("/products")}
+        className={`group flex items-center justify-center sm:justify-start gap-2 sm:gap-3 px-2 xs:px-3 sm:px-5 py-3 sm:py-4 relative transition-colors hover:bg-green-50 cursor-pointer ${
+          i < features.length - 1 ? "border-r border-gray-100" : ""
+        }`}
       >
+        {/* HOVER UNDERLINE */}
+        <div className="absolute bottom-0 left-2 right-2 xs:left-3 xs:right-3 sm:left-5 sm:right-5 h-[2px] bg-green-600 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300" />
+
+        {/* ICON — sm+ */}
         <div
-          className="w-full max-w-4xl bg-white rounded-[20px] grid grid-cols-3 overflow-hidden"
-          style={{
-            boxShadow: "0 8px 40px rgba(0,0,0,0.18), 0 2px 12px rgba(0,0,0,0.10)",
-          }}
+          className={`hidden sm:flex w-9 h-9 md:w-[46px] md:h-[46px] rounded-[12px] md:rounded-[14px] items-center justify-center flex-shrink-0 ${f.iconBg}`}
         >
-          {features.map((f, i) => (
-            <div
-              key={i}
-              onClick={() => navigate("/products")}
-              className={`group flex items-center gap-2 sm:gap-3 px-2 xs:px-3 sm:px-5 py-3 sm:py-4 relative transition-colors hover:bg-green-50 cursor-pointer ${
-                i < features.length - 1 ? "border-r border-gray-100" : ""
-              }`}
-            >
-              {/* HOVER UNDERLINE */}
-              <div className="absolute bottom-0 left-2 right-2 xs:left-3 xs:right-3 sm:left-5 sm:right-5 h-[2px] bg-green-600 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300" />
+          <f.Icon size={18} className={f.iconColor} strokeWidth={1.8} />
+        </div>
 
-              {/* ICON — sm+ */}
-              <div
-                className={`hidden sm:flex w-9 h-9 md:w-[46px] md:h-[46px] rounded-[12px] md:rounded-[14px] items-center justify-center flex-shrink-0 ${f.iconBg}`}
-              >
-                <f.Icon size={18} className={f.iconColor} strokeWidth={1.8} />
-              </div>
+        {/* ICON — mobile */}
+        <div
+          className={`flex sm:hidden w-7 h-7 rounded-[10px] items-center justify-center flex-shrink-0 ${f.iconBg}`}
+        >
+          <f.Icon size={14} className={f.iconColor} strokeWidth={1.8} />
+        </div>
 
-              {/* ICON — mobile */}
-              <div
-                className={`flex sm:hidden w-7 h-7 rounded-[10px] items-center justify-center flex-shrink-0 ${f.iconBg}`}
-              >
-                <f.Icon size={14} className={f.iconColor} strokeWidth={1.8} />
-              </div>
-
-              <div className="min-w-0">
-                <p className="text-[9px] xs:text-[10px] sm:text-[12px] md:text-[13px] font-bold text-gray-900 leading-tight">
-                  {f.title}
-                </p>
-                <p className="xs:block text-[8px] sm:text-[10px] md:text-[11px] text-gray-500 mt-0.5 leading-tight">
-                  {f.sub}
-                </p>
-              </div>
-            </div>
-          ))}
+        <div className="min-w-0">
+          <p className="text-[9px] xs:text-[10px] sm:text-[12px] md:text-[13px] font-bold text-gray-900 leading-tight">
+            {f.title}
+          </p>
+          {/* MODIFIED LINE BELOW: added 'hidden sm:block' and removed 'xs:block' */}
+          <p className="hidden sm:block text-[10px] md:text-[11px] text-gray-500 mt-0.5 leading-tight">
+            {f.sub}
+          </p>
         </div>
       </div>
+    ))}
+  </div>
+</div>
     </div>
   );
 };
