@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import About from "./pages/About";
 import CartSidebar from "@/components/CartSidebar";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import ProductsPage from "./pages/ProductPage";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
+          <Route path="/products" element={<ProductsPage />} />
           <Route path="/product/:slug" element={<ProductDetail />} />
 
           {/* Protected Routes */}

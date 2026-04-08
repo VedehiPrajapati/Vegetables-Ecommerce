@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    --background: 42 33% 97%;
+    --background: 120 40% 95%;
     --foreground: 150 30% 12%;
 
     --card: 0 0% 100%;
@@ -86,6 +86,163 @@
     --border: 150 10% 20%;
     --input: 150 10% 20%;
     --ring: 142 50% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:opacity-90 transition-all duration-300;
+  }
+
+  .btn-accent {
+    @apply bg-accent text-accent-foreground hover:opacity-90 transition-all duration-300;
+  }
+
+  .card-product {
+    @apply bg-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-border;
+  }
+
+  .badge-organic {
+    @apply bg-success text-success-foreground text-xs font-semibold px-2 py-0.5 rounded-full;
+  }
+
+  .badge-sale {
+    @apply bg-destructive text-destructive-foreground text-xs font-semibold px-2 py-0.5 rounded-full;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    @apply text-3xl md:text-4xl font-bold text-foreground;
+  }
+
+  .semicircle-footer {
+    border-radius: 50% 50% 0 0 / 80px 80px 0 0;
+  }
+}
+
+@layer utilities {
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+  }
+} */
+
+/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap'); */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* 🌿 BACKGROUND (very light pastel green) */
+    --background: 120 35% 96%;
+    --foreground: 140 25% 15%;
+
+    /* 🧾 CARDS */
+    --card: 120 30% 99%;
+    --card-foreground: 140 25% 15%;
+
+    --popover: 120 30% 99%;
+    --popover-foreground: 140 25% 15%;
+
+    /* 🌱 PRIMARY (soft green) */
+    --primary: 135 45% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    /* 🌿 SECONDARY (light mint) */
+    --secondary: 120 30% 90%;
+    --secondary-foreground: 140 25% 20%;
+
+    /* 🌫 MUTED */
+    --muted: 120 20% 92%;
+    --muted-foreground: 140 10% 45%;
+
+    /* 🍋 ACCENT (fresh yellow-green highlight) */
+    --accent: 90 60% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    /* ❌ ERROR */
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* 🧱 UI */
+    --border: 120 15% 85%;
+    --input: 120 15% 88%;
+    --ring: 135 45% 45%;
+
+    --radius: 0.75rem;
+
+    /* ✅ SUCCESS */
+    --success: 135 50% 45%;
+    --success-foreground: 0 0% 100%;
+
+    /* 🏷 BADGES */
+    --badge-sale: 0 75% 60%;
+    --badge-sale-foreground: 0 0% 100%;
+
+    --badge-organic: 135 50% 45%;
+    --badge-organic-foreground: 0 0% 100%;
+
+    /* 📱 SIDEBAR */
+    --sidebar-background: 120 25% 95%;
+    --sidebar-foreground: 140 20% 25%;
+    --sidebar-primary: 135 45% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 120 25% 90%;
+    --sidebar-accent-foreground: 140 20% 20%;
+    --sidebar-border: 120 15% 88%;
+    --sidebar-ring: 135 45% 45%;
+
+    /* --font-display: 'Playfair Display', serif;
+    --font-body: 'DM Sans', sans-serif; */
+
+    --font-display: 'Inter', sans-serif;
+--font-body: 'Inter', sans-serif;
+  }
+
+  .dark {
+    /* 🌑 DARK MODE (deep green theme) */
+    --background: 140 20% 10%;
+    --foreground: 120 30% 90%;
+
+    --card: 140 20% 14%;
+    --card-foreground: 120 30% 90%;
+
+    --popover: 140 20% 14%;
+    --popover-foreground: 120 30% 90%;
+
+    --primary: 135 50% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 140 15% 20%;
+    --secondary-foreground: 120 30% 90%;
+
+    --muted: 140 10% 22%;
+    --muted-foreground: 120 10% 60%;
+
+    --accent: 90 60% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --border: 140 10% 25%;
+    --input: 140 10% 25%;
+    --ring: 135 50% 55%;
   }
 }
 

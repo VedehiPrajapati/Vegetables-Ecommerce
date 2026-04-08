@@ -2,10 +2,26 @@ import { Truck, Shield, Leaf, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 
 const features = [
-  { icon: Leaf, title: "100% Organic", desc: "Certified organic produce from trusted farms" },
-  { icon: Truck, title: "Free Delivery", desc: "Free shipping on orders over $30" },
-  { icon: Shield, title: "Quality Guarantee", desc: "Fresh or your money back, guaranteed" },
-  { icon: Clock, title: "Same Day Delivery", desc: "Order before 2pm for same day delivery" },
+  {
+    icon: Leaf,
+    title: "Farm Fresh Quality",
+    desc: "Directly sourced from farms and mandis for maximum freshness",
+  },
+  {
+    icon: Truck,
+    title: "Fast Bulk Delivery",
+    desc: "Reliable next-day delivery for all bulk orders",
+  },
+  {
+    icon: Shield,
+    title: "Quality Assured",
+    desc: "Strict quality checks to ensure premium-grade produce",
+  },
+  {
+    icon: Clock,
+    title: "Early Morning Supply",
+    desc: "Get fresh stock delivered early morning for your business needs",
+  },
 ];
 
 const WhyChooseUs = () => {

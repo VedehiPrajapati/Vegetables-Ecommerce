@@ -21,7 +21,7 @@ const CartSidebar = () => {
   } = useCartStore();
 
   const { isAuthenticated } = useAuthStore();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
   const [isAddressOpen, setIsAddressOpen] = useState(false);
 
   const handleOrder = async () => {
