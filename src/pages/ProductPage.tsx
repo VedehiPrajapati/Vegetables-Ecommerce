@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import { Product } from "@/data/products";
 import { useSearchParams } from "react-router-dom";
 import { Filter, X } from "lucide-react"; // Note: Added icons for better mobile UI
+import SemicircleFooter from "@/components/SemicircleFooter";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "";
 
@@ -310,6 +311,7 @@ const ProductsPage = () => {
           )}
         </div>
       </div>
+      <SemicircleFooter />
     </div>
   );
 };

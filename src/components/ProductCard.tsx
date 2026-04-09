@@ -437,30 +437,30 @@ const ProductCard = ({ product }: { product: Product }) => {
         </div>
 
         {/* Price Box */}
-<div className="grid grid-cols-2 gap-1.5 px-2 py-1">
-  {/* Today's Rate */}
-  <div className="bg-green-50 rounded-lg p-1.5 flex flex-col justify-center">
-    <p className="text-[9px] sm:text-xs text-gray-500 leading-none mb-0.5">
-      Today's Rate
-    </p>
-    <p className="text-sm sm:text-lg font-bold text-gray-900 flex items-baseline">
-      ₹{product.price}
-      <span className="text-[8px] sm:text-xs text-gray-500 font-medium ml-0.5">
-        /kg
-      </span>
-    </p>
-  </div>
+        <div className="grid grid-cols-2 gap-1.5 px-2 py-1">
+          {/* Today's Rate */}
+          <div className="bg-green-50 rounded-lg p-1.5 flex flex-col justify-center">
+            <p className="text-[9px] sm:text-xs text-gray-500 leading-none mb-0.5">
+              Today's Rate
+            </p>
+            <p className="text-sm sm:text-lg font-bold text-gray-900 flex items-baseline">
+              ₹{product.price}
+              <span className="text-[8px] sm:text-xs text-gray-500 font-medium ml-0.5">
+                /kg
+              </span>
+            </p>
+          </div>
 
-  {/* Est. Total */}
-  <div className="bg-green-50 rounded-lg p-1.5 flex flex-col justify-center items-end text-right">
-    <p className="text-[9px] sm:text-xs text-gray-500 leading-none mb-0.5">
-      Est. Total
-    </p>
-    <p className="text-sm sm:text-lg font-bold text-gray-900">
-      ₹{totalPrice}
-    </p>
-  </div>
-</div>
+          {/* Est. Total */}
+          <div className="bg-green-50 rounded-lg p-1.5 flex flex-col justify-center items-end text-right">
+            <p className="text-[9px] sm:text-xs text-gray-500 leading-none mb-0.5">
+              Est. Total
+            </p>
+            <p className="text-sm sm:text-lg font-bold text-gray-900">
+              ₹{totalPrice}
+            </p>
+          </div>
+        </div>
 
 
         {/* Quantity Selector */}

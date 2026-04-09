@@ -13,6 +13,7 @@ import About from "./pages/About";
 import CartSidebar from "@/components/CartSidebar";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ProductsPage from "./pages/ProductPage";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+      <ScrollToTop />
         <CartSidebar /> {/* Global Cart Sidebar */}
         <Routes>
           <Route path="/login" element={<Login />} />

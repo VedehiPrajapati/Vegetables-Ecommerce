@@ -328,6 +328,7 @@ const ProductDetail = () => {
           images: p.images?.map((img: any) => img.secure_url) || [],
           description: p.description,
           unit: p.unit || "kg",
+          stock: p.stock ?? 0,
           discount: Math.round(((p.originalPrice - p.offerPrice) / p.originalPrice) * 100)
         });
 
@@ -368,6 +369,18 @@ const ProductDetail = () => {
       return;
     }
 
+    // 1. Check if stock is 0
+    if (product.stock <= 0) {
+      toast.error("This item is currently out of stock");
+      return;
+    }
+
+    // 2. Check if requested quantity exceeds stock
+    if (quantity > product.stock) {
+      toast.error(`Only ${product.stock}${product.unit} available in stock`);
+      return;
+    }
+
     setIsAdding(true);
     try {
       await addToCart(product.id, quantity);
@@ -396,9 +409,8 @@ const ProductDetail = () => {
               <div
                 key={p._id}
                 onClick={() => navigate(`/product/${p.slug}`)}
-                className={`cursor-pointer border rounded-xl p-2 flex items-center gap-2 hover:shadow-md transition ${
-                  slug === p.slug ? "border-primary bg-primary/5" : "border-border"
-                }`}
+                className={`cursor-pointer border rounded-xl p-2 flex items-center gap-2 hover:shadow-md transition ${slug === p.slug ? "border-primary bg-primary/5" : "border-border"
+                  }`}
               >
                 <img
                   src={p.mainImage?.secure_url}
@@ -446,9 +458,8 @@ const ProductDetail = () => {
                     <div
                       key={i}
                       onClick={() => setCurrentMainImage(img)}
-                      className={`w-16 h-16 rounded-lg border cursor-pointer overflow-hidden ${
-                        currentMainImage === img ? "border-primary" : "border-border"
-                      }`}
+                      className={`w-16 h-16 rounded-lg border cursor-pointer overflow-hidden ${currentMainImage === img ? "border-primary" : "border-border"
+                        }`}
                     >
                       <img src={img} className="w-full h-full object-cover" />
                     </div>
@@ -512,28 +523,53 @@ const ProductDetail = () => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <div className="flex items-center border rounded-xl px-3 py-2 w-fit">
-                    <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>
+                  {/* Quantity Controls */}
+                  <div className={`flex items-center border rounded-xl px-3 py-2 w-fit ${product.stock <= 0 ? "opacity-50 pointer-events-none" : ""}`}>
+                    <button
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      disabled={product.stock <= 0}
+                    >
                       <Minus size={16} />
                     </button>
                     <span className="px-4 font-medium">{quantity}</span>
-                    <button onClick={() => setQuantity(quantity + 1)}>
+                    <button
+                      onClick={() => {
+                        if (quantity < product.stock) {
+                          setQuantity(quantity + 1);
+                        } else {
+                          toast.warning(`Cannot exceed available stock (${product.stock})`);
+                        }
+                      }}
+                      disabled={product.stock <= 0}
+                    >
                       <Plus size={16} />
                     </button>
                   </div>
 
+                  {/* Add to Cart Button */}
                   <button
                     onClick={handleAddToCart}
-                    className="bg-primary text-white px-5 py-2 rounded-xl flex items-center gap-2 w-full sm:w-auto"
+                    disabled={isAdding || product.stock <= 0}
+                    className={`${product.stock <= 0
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-primary hover:bg-primary/90"
+                      } text-white px-5 py-2 rounded-xl flex items-center justify-center gap-2 w-full sm:w-auto transition-colors`}
                   >
                     {isAdding ? (
                       <Loader2 className="animate-spin w-4 h-4" />
                     ) : (
                       <ShoppingCart className="w-4 h-4" />
                     )}
-                    Add to Cart
+                    {product.stock <= 0 ? "Out of Stock" : "Add to Cart"}
                   </button>
                 </div>
+
+                {/* Optional: Add a small stock indicator text */}
+                {product.stock > 0 && product.stock <= 5 && (
+                  <p className="text-orange-500 text-xl font-medium">
+                    Only {product.stock} {product.unit} left!
+                  </p>
+                )}
 
                 {/* Badges */}
                 <div className="grid grid-cols-2 gap-4">

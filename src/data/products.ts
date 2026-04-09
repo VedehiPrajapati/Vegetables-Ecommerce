@@ -10,6 +10,7 @@ export type Product = {
   organic: boolean;
   rating: number;
   description: string;
+  stock: number;
 };
 
 export type CartItem = Product & {
