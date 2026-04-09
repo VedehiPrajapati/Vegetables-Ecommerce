@@ -771,8 +771,15 @@ const FeaturedProducts = () => {
   const onMobileTouchEnd = () => {
     if (!mobileDragging) return;
     setMobileDragging(false);
-    if (mobileDragOffset < -DRAG_THRESHOLD) goMobile(mobileDragStartSlide.current + 1);
-    else if (mobileDragOffset > DRAG_THRESHOLD) goMobile(mobileDragStartSlide.current - 1);
+
+    // Determine if we should move to next/prev slide
+    if (mobileDragOffset < -DRAG_THRESHOLD && mobileSlide < mobileTotalPages - 1) {
+      setMobileSlide(prev => prev + 1);
+    } else if (mobileDragOffset > DRAG_THRESHOLD && mobileSlide > 0) {
+      setMobileSlide(prev => prev - 1);
+    }
+
+    // Clear offset
     setMobileDragOffset(0);
   };
 
@@ -795,10 +802,17 @@ const FeaturedProducts = () => {
 
   const makeStyle = (slide: number, dragging: boolean, dragOffset: number, visibleCards: number, gapPx: number) => {
     const cardPct = 100 / visibleCards;
+    // Calculate the base transform based on the current slide index
+    const baseTranslate = `calc(-${slide} * (${cardPct}% + ${gapPx}px))`;
+
     return {
-      transform: `translateX(calc(-${slide} * (${cardPct}% + ${gapPx}px) + ${dragging ? dragOffset : 0}px))`,
-      transition: dragging ? "none" : "transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-      willChange: "transform" as const,
+      // translate3d(x, y, z) triggers GPU acceleration
+      transform: `translate3d(calc(${baseTranslate} + ${dragOffset}px), 0, 0)`,
+      // Ensure transition is snappy when not dragging, and instant when dragging
+      transition: dragging ? "none" : "transform 0.4s cubic-bezier(0.2, 0, 0.2, 1)",
+      willChange: "transform",
+      cursor: dragging ? "grabbing" : "grab",
+      touchAction: "pan-y", // Allows vertical scrolling while preventing horizontal browser interference
     };
   };
 
@@ -848,9 +862,8 @@ const FeaturedProducts = () => {
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`absolute top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md border transition-all ${
-        disabled ? "opacity-0 pointer-events-none" : "hover:bg-primary hover:text-white text-gray-700"
-      } ${direction === 'left' ? "-left-4" : "-right-4"}`}
+      className={`absolute top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md border transition-all ${disabled ? "opacity-0 pointer-events-none" : "hover:bg-primary hover:text-white text-gray-700"
+        } ${direction === 'left' ? "-left-4" : "-right-4"}`}
     >
       <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d={direction === 'left' ? "M15 19l-7-7 7-7" : "M9 5l7 7-7 7"} />
@@ -906,9 +919,8 @@ const FeaturedProducts = () => {
           <div className="flex gap-1.5 md:gap-2 mt-3 md:mt-4 overflow-x-auto md:flex-wrap pb-0.5 md:pb-0 scrollbar-hide -mx-3 px-3 md:mx-0 md:px-0">
             <button
               onClick={() => setSelectedCategory(null)}
-              className={`flex-shrink-0 px-3 py-1 md:px-3 md:py-1.5 rounded-full text-xs font-medium transition whitespace-nowrap ${
-                !selectedCategory ? "bg-primary text-white" : "bg-white text-gray-600 border hover:bg-gray-50"
-              }`}
+              className={`flex-shrink-0 px-3 py-1 md:px-3 md:py-1.5 rounded-full text-xs font-medium transition whitespace-nowrap ${!selectedCategory ? "bg-primary text-white" : "bg-white text-gray-600 border hover:bg-gray-50"
+                }`}
             >
               All Items
             </button>
@@ -916,9 +928,8 @@ const FeaturedProducts = () => {
               <button
                 key={cat._id}
                 onClick={() => setSelectedCategory(cat)}
-                className={`flex-shrink-0 px-3 py-1 md:px-3 md:py-1.5 rounded-full text-xs font-medium transition whitespace-nowrap ${
-                  selectedCategory?._id === cat._id ? "bg-primary text-white" : "bg-white text-gray-600 border hover:bg-gray-50"
-                }`}
+                className={`flex-shrink-0 px-3 py-1 md:px-3 md:py-1.5 rounded-full text-xs font-medium transition whitespace-nowrap ${selectedCategory?._id === cat._id ? "bg-primary text-white" : "bg-white text-gray-600 border hover:bg-gray-50"
+                  }`}
               >
                 {cat.name}
               </button>
@@ -933,14 +944,12 @@ const FeaturedProducts = () => {
           <>
             {/* MOBILE VIEW */}
             <div className="block lg:hidden relative">
-              <div className="overflow-hidden" onTouchStart={onMobileTouchStart} onTouchMove={onMobileTouchMove} onTouchEnd={onMobileTouchEnd}>
-                <div className="flex gap-2.5" style={makeStyle(mobileSlide, mobileDragging, mobileDragOffset, MOBILE_VISIBLE, 10)}>
-                  {products.map((product) => (
-                    <div key={product.id} className="flex-shrink-0 w-[calc(50%-5px)]">
-                      <ProductCard product={product} />
-                    </div>
-                  ))}
-                </div>
+              <div className="flex gap-2.5 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4">
+                {products.map((product) => (
+                  <div key={product.id} className="flex-shrink-0 w-[calc(80%-10px)] snap-center">
+                    <ProductCard product={product} />
+                  </div>
+                ))}
               </div>
               <NavButton direction="left" onClick={() => goMobile(mobileSlide - 1)} disabled={mobileSlide === 0} />
               <NavButton direction="right" onClick={() => goMobile(mobileSlide + 1)} disabled={mobileSlide >= mobileTotalPages - 1} />
