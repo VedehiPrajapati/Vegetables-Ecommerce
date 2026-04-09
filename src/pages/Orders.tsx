@@ -102,7 +102,7 @@ const Orders = () => {
                         </button>
                         <div>
                             <h1 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
-                                Order <span className="text-green-600 italic">History</span>
+                                Order <span className="text-green-600 ">History</span>
                             </h1>
                             <p className="text-slate-500 mt-1">Track and manage your fresh harvest deliveries</p>
                         </div>
@@ -134,7 +134,7 @@ const Orders = () => {
                                                 {/* TOP */}
                                                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                                                     <div className="flex items-center gap-4">
-                                                        <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 border border-slate-100 shadow-inner">
+                                                        <div className="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center text-gray-500  ">
                                                             <Package className="w-7 h-7" />
                                                         </div>
                                                         <div>
@@ -150,9 +150,20 @@ const Orders = () => {
                                                         </div>
                                                     </div>
 
-                                                    <div className={`px-4 py-1.5 rounded-full text-xs font-bold border ${getStatusColor(status)}`}>
-                                                        {order.status}
-                                                    </div>
+                                                    <div className={`
+  /* Layout: Shrink to fit text width */
+  w-fit whitespace-nowrap 
+  
+  /* Mobile Styles (Default) */
+  px-2.5 py-0.5 text-[10px] rounded-full font-bold border
+  
+  /* Desktop Styles (md and up) */
+  md:px-4 md:py-1 md:text-xs
+  
+  ${getStatusColor(status)}
+`}>
+  {order.status}
+</div>
                                                 </div>
 
                                                 {/* ADDRESS + TOTAL */}
